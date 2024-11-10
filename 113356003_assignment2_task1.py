@@ -4,7 +4,7 @@ from google.oauth2 import service_account
 
 project_id = 'assignment2-113356003-441002'
 instance_id = 'studentinstance'
-table_id = 'student_data'
+instance_table_id = 'student_data'
 
 credentials = service_account.Credentials.from_service_account_file(
     'assignment2-113356003-441002-3c88df9a7aaa.json')
@@ -17,15 +17,15 @@ if not instance.exists():
     print(f"Creating instance {instance_id}")
     instance.create()
 
-table = instance.table(table_id)
+table = instance.table(instance_table_id)
 column_families = {"user_info": None, "activity_log": None}
 
 if table.exists():
-    print(f"Table: {table_id} exists. Deleting the table.")
+    print(f"Table: {instance_table_id} exists. Deleting the table.")
     table.delete()
 
 if not table.exists():
-    print(f"""Table: {table_id} is not exist. Creates the table.""")
+    print(f"""Table: {instance_table_id} is not exist. Creates the table.""")
     table.create(column_families=column_families)
 
 data = [
@@ -46,7 +46,7 @@ for entry in data:
 
 from google.cloud.bigtable import row_filters
 
-table = instance.table(table_id)
+table = instance.table(instance_table_id)
 
 # 定義過濾器來讀取所有行
 filter_ = row_filters.PassAllFilter(True)

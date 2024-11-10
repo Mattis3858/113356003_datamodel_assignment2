@@ -19,7 +19,6 @@ source_uri = f"https://googleapis.com/bigtable/projects/{project_id}/instances/{
 
 
 # Define the external table configuration
-# source_uri = f"projects/{project_id}/instances/{instance_id}/tables/{data_id}"
 external_config = bigquery.ExternalConfig("BIGTABLE")
 external_config.source_uris = [source_uri]
 
